@@ -1,5 +1,5 @@
-const User = require('../models/user')
-const {Admin} = require('../models/admin')
+const User = require('../../models/users/user')
+const {Admin} = require('../../models/users/admin')
 
 
 const controllerUser = {

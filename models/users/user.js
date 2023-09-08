@@ -32,6 +32,8 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+
+
     admin:[{
         ref: "Admin",
         type: mongoose.Schema.Types.ObjectId

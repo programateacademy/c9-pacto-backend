@@ -1,5 +1,5 @@
-const {ROLE} = require('../models/admin')
-const User = require('../models/user')
+const {ROLE} = require('../models/users/admin')
+const User = require('../models/users/user')
 
 
 const verifySignup ={

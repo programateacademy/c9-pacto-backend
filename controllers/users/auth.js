@@ -1,7 +1,7 @@
 const config = require ('../config')
-const {Admin} = require('../models/admin')
+const {Admin} = require('../../models/users/admin')
 const jwt = require('jsonwebtoken')
-const User = require('../models/user')
+const User = require('../../models/users/user')
 
 const userControllers ={
     signup: async (req,res) =>{

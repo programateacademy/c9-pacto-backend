@@ -1,10 +1,10 @@
 const express = require('express')
 
-const controllerUser = require('../controllers/user')
+const controllerUser = require('../../controllers/users/user')
 
 const router = express.Router()
-const authJwt = require('../middlewares/authJwt')
-const verifySignup = require('../middlewares/verifySignup')
+const authJwt = require('../../middlewares/authJwt')
+const verifySignup = require('../../middlewares/verifySignup')
 
 
 router.post('/create',[ authJwt.verifyToken,authJwt.isAdmin,verifySignup.checkRoleExist,verifySignup.checkDupletUserNameOrEmail
