@@ -7,8 +7,6 @@ const controllerPublication = {
             const {userId,description,image} = req.body
             const date_create = new Date();
 
-            console.log("UserID:", userId)
-
             const user = await User.findById(userId) // buscar el ID del usuario
             if (!user){
                 return res.status(404).json({error: "could not find user"})
@@ -20,7 +18,6 @@ const controllerPublication = {
                 description: description,
                 image: image,
             });
-            console.log('Publication created');
             res.json({ msg: 'created' });
         } catch (error) {
             return res.status(500).json({ msg: error.message })

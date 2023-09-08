@@ -9,8 +9,6 @@ const interacControllers = {
         try{
         const {publicationId,reactions,comments,shares} = req.body
 
-        console.log("PublicationID:", publicationId)
-
         const publication = await Publication.findById(publicationId) //Share Id Publications
         if(!publication){
             return res.status(404).json({error:'this action is not possible'}) //nou found
@@ -22,7 +20,6 @@ const interacControllers = {
             comments: comments,
             shares: shares
         })
-        console.log('Interaction created');
         const response = {
             msg: 'New interaction created',
             interactions: {
@@ -67,7 +64,6 @@ const interacControllers = {
                 shares: shares
             })
             res.json({msg: 'Update'})
-            console.log(Interactions)
 
         }catch(error){
             return res.status(404).json({msg: error.message})
