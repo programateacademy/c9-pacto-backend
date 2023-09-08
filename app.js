@@ -6,6 +6,7 @@ const publication = require ('./routers/PublicationsRou/publications')
 const admin = require('./routers/auth')
 const interactions = require('./routers/PublicationsRou/interactions')
 const createAdmin = require('./libs/initialSetup')
+const form = require('./routers/users/formUser')
 
 const app = express()
 createAdmin()
@@ -27,6 +28,7 @@ app.use('/poofo',user)
 app.use('/publictpoofo',publication)
 app.use('/admins',admin)
 app.use('/interactions',interactions)
+app.use('/formUser',form)
 
 
 module.exports = app
