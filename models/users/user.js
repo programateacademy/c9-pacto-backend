@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 
 
 const userSchema = new Schema({
+
     userName: {
         type: String,
         required: true,
@@ -33,6 +34,49 @@ const userSchema = new Schema({
         required: true
     },
 
+    typEntitySocialActor: { // RECORDAR QUE MUCHAS DE ESTAS VALIDACIONES SON LISTAS DE DATOS STRING GUARDARLOS DENTRO DE UN ARRAY
+                              //PARA CONSUMIRLOS EN EL FROND :) GRACIAS Y BUENAS NOCHES
+      type: String
+    },
+
+    companyNameOrentity:{
+      type: String
+    },
+
+    names:{
+      type: String,
+      required: true
+    },
+
+    surName:{
+      type: String,
+      required: true
+    },
+
+    phoneNumber:{
+      type: Number,
+      minLength: 3,
+      maxLength: 13,
+      required: true
+    },
+
+    gender:{
+      type: String,
+      required: true
+    },
+
+    years:{
+      type: Number,
+      required: true
+    },
+
+    ethnicity:{
+      type: String
+    },
+
+    person:{
+      type: String
+    },
 
     admin:[{
         ref: "Admin",
