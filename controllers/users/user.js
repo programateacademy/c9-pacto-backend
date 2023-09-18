@@ -6,7 +6,7 @@ const controllerUser = {
 
         create: async (req, res) => {
         try {
-            const {userName,userImg,email,password,admin} = req.body
+            const {userName,userImg,email,password,admin , typEntitySocialActor, companyNameOrentity, phoneNumber, years, ethnicity, person} = req.body
             const adminFound = await Admin.find({ name: { $in: admin } })
 
             const user = new User({
@@ -14,6 +14,12 @@ const controllerUser = {
                 userImg,
                 email,
                 password,
+                typEntitySocialActor,
+                companyNameOrentity,
+                phoneNumber,
+                years,
+                ethnicity,
+                person,
                 admin: adminFound.map((admins) => admins._id)
             })
 

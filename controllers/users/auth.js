@@ -6,12 +6,17 @@ const User = require('../../models/users/user')
 const userControllers ={
     signup: async (req,res) =>{
         try{
-        const {userName, email, password, admin} = req.body
-
+        const {userName, email, password, admin, typEntitySocialActor, companyNameOrentity, phoneNumber, years, ethnicity, person} = req.body
         const userRegis = new User({
             userName,
             email,
-            password
+            password,
+            typEntitySocialActor,
+            companyNameOrentity,
+            phoneNumber,
+            years,
+            ethnicity,
+            person
         })
 
         if(admin){
