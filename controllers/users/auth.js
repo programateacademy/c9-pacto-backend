@@ -1,4 +1,4 @@
-const config = require ('../config')
+const config = require ('../../config')
 const {Admin} = require('../../models/users/admin')
 const jwt = require('jsonwebtoken')
 const User = require('../../models/users/user')
@@ -39,7 +39,7 @@ const userControllers ={
         const token = jwt.sign({id: savedUser._id}, config.SECRET,{
             expiresIn: 86400 //cada dia
         })
-        res.status(200).json({token})
+        res.status(200).json({token, savedUser})
     }catch(error){
         return res.status(500).json(error.message)
     }

@@ -1,7 +1,7 @@
 const express = require('express')
 const userControllers = require ('../../controllers/users/auth')
-const verifySignup = require ('../middlewares/verifySignup')
-const authJwt = require('../middlewares/authJwt')
+const verifySignup = require ('../../middlewares/verifySignup')
+const authJwt = require('../../middlewares/authJwt')
 const router = express.Router()
 
 router.use((req, res, next) => {
