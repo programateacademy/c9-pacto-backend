@@ -1,5 +1,5 @@
 const Publication = require('../../models/PublicationsModels/publications');
-const User = require('../../models/user');
+const User = require('../../models/users/user');
 
 const controllerPublication = {
     create: async (req, res) => {
