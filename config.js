@@ -7,8 +7,6 @@ module.exports ={
 
     ADMIN_SURNAMES:"Beltran Rincon",
 
-    ADMIN_USERNAME :"SebastianB",
-
     ADMIN_PASSWORD : "admin123"
 
 }
