@@ -5,10 +5,31 @@ const controllerPublication = require('../../controllers/publicationsControllers
 
 const router = express.Router()
 
-router.post('/create', authJwt.verifyToken,controllerPublication.create)
+//rutas 
+//crear publicación
+router.post('/create', controllerPublication.create)
+
+//buscarpublicaciones
 router.get('/', controllerPublication.getPublication)
+
+//publicaiones por ID
 router.get('/:id', controllerPublication.getPublicationById)
-router.patch('/update/:id',authJwt.verifyToken,controllerPublication.updatePublication)
-router.delete('/delete/:id',[authJwt.verifyToken,authJwt.isAdmin],controllerPublication.deletePublication)
+
+//actualizar la publicación
+router.patch('/update/:id', authJwt.verifyToken, controllerPublication.updatePublication)
+
+//eliminar publicación
+router.delete('/delete/:id', [authJwt.verifyToken, authJwt.isAdmin], controllerPublication.deletePublication)
+
+// Dar like a una publicación
+router.post('/:id/like', controllerPublication.likePublication);
+
+// Quitar like a una publicación
+router.delete('/:id/unlike', controllerPublication.unlikePublication);
+
+
+// Nueva ruta para obtener los likes de un usuario específico
+router.get('/users/:userId/likes', controllerPublication.getLikesForUser);
 
 module.exports = router
+

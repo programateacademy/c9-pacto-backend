@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 //Created a const to store the mongoose module (allows create a model Schema)
 const Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId;
 
 const PublicationSchema = new Schema({
     user: {
-        ref: 'User',
+        ref: 'User', //Referecia a modelo de Usuario
         type: Schema.Types.ObjectId
     },
     date_create: {
@@ -19,6 +20,21 @@ const PublicationSchema = new Schema({
     image: {
         type: String
     },
+
+    // texto alternativo imagenes
+    descriptionImg:{
+        type: String,
+        required: true
+    },
+
+    likes: [
+        {
+            
+                ref: 'User', // Referencia al modelo de Usuario
+                type: Schema.Types.ObjectId
+            
+        }
+    ]
 
 },{versionKey:false})
 

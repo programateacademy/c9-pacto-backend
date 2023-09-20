@@ -1,15 +1,16 @@
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const express = require('express')
-const user = require ('./routers/users/user')
+const user = require ('./routers/user')
 const publication = require ('./routers/PublicationsRou/publications')
-const admin = require('./routers/users/auth')
-const rolAdmin = require ('./libs/initialSetup')
-
+const admin = require('./routers/auth')
+const comments = require('./routers/PublicationsRou/comments')
+const rolAdmin = require('./libs/initialSetup')
 
 const app = express()
 rolAdmin.createAdmin()
 rolAdmin.adminprint()
+
 
 app.use(cors({
     origin:"*",
@@ -27,6 +28,9 @@ app.use(bodyParser.json())
 app.use('/poofo',user)
 app.use('/publictpoofo',publication)
 app.use('/admins',admin)
+
+
+app.use('/comments',comments)
 
 
 module.exports = app
