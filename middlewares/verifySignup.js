@@ -1,9 +1,10 @@
-const {ROLE} = require('../models/users/admin')
-const User = require('../models/users/user')
+const {ROLE} = require('../models/admin')
+const User = require('../models/user')
 
 
 const verifySignup ={
 
+    //validación para no permitir usuarios duplicados
     checkDupletUserNameOrEmail :async (req,res,next) =>{
         try{
         const userFound = await User.findOne({userName: req.body.userName})
@@ -18,19 +19,20 @@ const verifySignup ={
     }
     },
 
+    //Validación de roles
     checkRoleExist: (req, res, next) => {
 
         if (!req.body.admin || req.body.admin.length === 0) {
             req.body.admin = ["user"]
         }
-
+        
         for (let i = 0; i < req.body.admin.length; i++) {
             if (!ROLE.includes(req.body.admin[i])) {
                 return res.status(400).json({
                     message: `Role ${req.body.admin[i]} does not exist`});
             }
         }
-
+        
         next();
     }
 }
