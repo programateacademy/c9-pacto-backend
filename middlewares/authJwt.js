@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config')
-const User = require('../models/users/user')
-const {Admin} = require('../models/users/admin')
+const User = require('../models/user')
+const {Admin} = require('../models/admin')
 
 const authJwt ={
-
+    
+    //verificación del token
     verifyToken : async(req,res, next) =>{
-
-
+    
+    
         let token = req.headers['x-access-token']
 
         if(!token) return res.status(403).json({message: 'no token'})
-
+    
         try {
             const decoded = jwt.verify(token,config.SECRET)
             req.userId = decoded.id
@@ -26,10 +27,11 @@ const authJwt ={
     }
 },
 
+//verificación si es un administrador
 isAdmin : async (req,res, next) =>{
     try{
 
-
+    
     const user = await User.findById(req.userId)
     const admin = await Admin.find({_id: {$in: user.admin}})
 
@@ -39,7 +41,7 @@ isAdmin : async (req,res, next) =>{
             return
         }
     }
-
+    
     return res.status(403).json({message: "Require Admin role"})
     } catch(error){
         console.log(error);
