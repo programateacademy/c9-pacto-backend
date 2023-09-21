@@ -6,7 +6,6 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     userName: {
         type: String,
-        required: true,
         maxLenth: 100
     },
 
@@ -43,6 +42,44 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+
+    typEntitySocialActor:{
+        type: String,
+    },
+    
+    companyNameOrentity:{
+        type: String
+    },
+
+    phoneNumber:{
+        type: Number,
+        minLenth:3,
+        maxLenth: 10
+    },
+
+    country:{
+        type: String,
+        default: "Colombia",
+    },
+
+    gender:{
+        type: String
+    },
+
+    years:{
+        type: Number,
+        minLenth: 5,
+        maxLenth: 100
+    },
+
+    ethnicity:{
+        type: String
+    },
+
+    person:{
+        type: String
+    },
+
     admin:[{
         ref: "Admin", //Referecia a modelo de Admin
         type: mongoose.Schema.Types.ObjectId
