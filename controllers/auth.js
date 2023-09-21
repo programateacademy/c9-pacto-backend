@@ -8,15 +8,28 @@ const userControllers ={
     //Controlador para la creacion de Usuarios & Administradores
     signup: async (req,res) =>{
         try{
-        const {names, surNames ,email, password,userImg, admin} = req.body
+        const {names, surNames ,email, password,userImg, 
+            typEntitySocialActor, companyNameOrentity, phoneNumber,
+            gender, years, ethnicity, person, country,
+            admin } = req.body
 
         const userName = `${names} ${surNames}`
 
         const userRegis = new User({
             userName,
+            names,
+            surNames,
             email,
             password,
-            userImg
+            userImg,
+            typEntitySocialActor,
+            companyNameOrentity,
+            phoneNumber,
+            gender,
+            years,
+            ethnicity,
+            person,
+            country
         })
 
         if(admin){

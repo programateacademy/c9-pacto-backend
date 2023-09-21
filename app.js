@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 
-app.use('/poofo',user)
-app.use('/publictpoofo',publication)
+app.use('/users',user)
+app.use('/publictpacto',publication)
 app.use('/admins',admin)
 
 
