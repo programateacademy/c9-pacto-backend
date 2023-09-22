@@ -1,6 +1,6 @@
 const Publication = require('../../models/publicationsModels/publications');
 const User = require('../../models/user');
-const Comments = require('../../models/publicationsModels/publications')
+const Comments = require('../../models/publicationsModels/comments')
 
 const commentController ={
 
