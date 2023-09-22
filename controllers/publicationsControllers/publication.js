@@ -1,6 +1,6 @@
 const User = require('../../models/user');
 const mongoose = require('mongoose')
-const Publication = require('../../models/publicationsModels/publication')
+const Publication = require('../../models/publications/publication')
 const ObjectId = mongoose.Types.ObjectId;
 
 
