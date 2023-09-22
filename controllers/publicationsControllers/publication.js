@@ -58,11 +58,13 @@ const controllerPublication = {
             const user = req.body.user
             const description = req.body.description
             const image = req.body.image
+            const descriptionImg = req.body.descriptionImg
 
             await Publication.findByIdAndUpdate(id, {
                 user: user._id,
                 description: description,
                 image: image,
+                descriptionImg: descriptionImg
             })
             res.json({ msg: 'Update' })
         } catch (error) {
