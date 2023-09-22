@@ -80,6 +80,13 @@ const userSchema = new Schema({
         type: String
     },
 
+    departamento:{
+        type: String
+    },
+    municipio:{
+        type: String
+    },
+
     admin:[{
         ref: "Admin", //Referecia a modelo de Admin
         type: mongoose.Schema.Types.ObjectId
