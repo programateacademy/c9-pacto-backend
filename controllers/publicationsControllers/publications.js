@@ -1,5 +1,5 @@
-const Publication = require('../../models/publicationsModels/publications');
 const User = require('../../models/user');
+const Publication = require('../../models/publicationsModels/publications')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId;
 
