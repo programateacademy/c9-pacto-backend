@@ -62,6 +62,14 @@ const userSchema = new Schema({
         default: "Colombia",
     },
 
+    departamentoSelect:{
+        type: String
+    },
+
+    municipioSelect:{
+        type: String
+    },
+
     gender:{
         type: String
     },
