@@ -8,7 +8,7 @@ const ObjectId = mongoose.Types.ObjectId;
 const controllerPublication = {
     create: async (req, res) => {
         try {
-            const { userId, description, image, likes} = req.body
+            const { userId, description, image, descriptionImg,likes} = req.body
             const date_create = new Date();
 
             console.log("UserID:", userId)
@@ -23,6 +23,7 @@ const controllerPublication = {
                 date_create: date_create,
                 description: description,
                 image: image,
+                descriptionImg,
                 likes: []
             });
             newPublication.likes = likes.map((userId) => mongoose.Types.ObjectId(userId));
