@@ -23,8 +23,7 @@ const PublicationSchema = new Schema({
 
     // texto alternativo imagenes
     descriptionImg:{
-        type: String,
-        required: true
+        type: String
     },
 
     likes: [
