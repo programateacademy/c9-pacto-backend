@@ -10,7 +10,7 @@ const userControllers ={
         try{
         const {names, surNames ,email, password,userImg, 
             typEntitySocialActor, companyNameOrentity, phoneNumber,
-            gender, years, ethnicity, person, country, departamentoSelect, municipioSelect,
+            gender, years, ethnicity, person, country, 
             admin } = req.body
 
         const userName = `${names} ${surNames}`
@@ -30,8 +30,6 @@ const userControllers ={
             ethnicity,
             person,
             country,
-            departamentoSelect,
-            municipioSelect
         })
 
         if(admin){
