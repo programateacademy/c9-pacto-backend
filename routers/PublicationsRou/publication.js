@@ -19,7 +19,7 @@ router.get('/:id', controllerPublication.getPublicationById)
 router.patch('/update/:id', authJwt.verifyToken, controllerPublication.updatePublication)
 
 //eliminar publicación
-router.delete('/delete/:id', authJwt.verifyToken, controllerPublication.deletePublication)
+router.delete('/delete/:id', controllerPublication.deletePublication)
 
 // Dar like a una publicación
 router.post('/:id/like', controllerPublication.likePublication);
