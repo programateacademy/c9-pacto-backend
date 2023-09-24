@@ -22,9 +22,13 @@ router.get('/',authJwt.verifyToken,userControllers.getsingup) //buscar todos los
 
 router.get('/usersByRole',userControllers.getUsersByRole)
 
+
+
 router.post('/change-password', authJwt.verifyToken,userControllers.changePassword)
 
 router.post("/send-password-link", userControllers.sendPasswordLink)
+
+
 
 
 
