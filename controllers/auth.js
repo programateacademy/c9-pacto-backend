@@ -1,8 +1,9 @@
 const config = require ('../config')
 const {Admin} = require('../models/admin')
-const nodemailer = require('nodemailer')
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const nodemailer = require('nodemailer')
+const bcrypt = require('bcrypt')
 
 // email config
 const transporter = nodemailer.createTransport({
@@ -18,30 +19,13 @@ const userControllers ={
     //Controlador para la creacion de Usuarios & Administradores
     signup: async (req,res) =>{
         try{
-        const {names, surNames ,email, password,userImg, 
-            typEntitySocialActor, companyNameOrentity, phoneNumber,
-            gender, years, ethnicity, person, country, departamento, municipio,
-            admin } = req.body
-
-        const userName = `${names} ${surNames}`
+        const {userName, email, password,userImg, admin} = req.body
 
         const userRegis = new User({
             userName,
-            names,
-            surNames,
             email,
             password,
-            userImg,
-            typEntitySocialActor,
-            companyNameOrentity,
-            phoneNumber,
-            gender,
-            years,
-            ethnicity,
-            person,
-            country,
-            departamento,
-            municipio,
+            userImg
         })
 
         if(admin){
@@ -64,7 +48,7 @@ const userControllers ={
         const token = jwt.sign({id: savedUser._id}, config.SECRET,{
             expiresIn: 86400 //tiempo de que tarda en expirar el token (cada 24h) 
         })
-        res.status(200).json({token, savedUser})
+        res.status(200).json({token})
     }catch(error){
         return res.status(500).json(error.message)
     }
@@ -82,11 +66,11 @@ const userControllers ={
         if (!mathPassword) return res.status(401).json({token: null, message: 'invalid password '})
         
         //una vez autentificado loguea y genera un nuevo token
-        const token = jwt.sign({id: userFound._id, role: userFound.admin}, config.SECRET,{
+        const token = jwt.sign({id: userFound._id}, config.SECRET,{
             expiresIn: 86400
         })
 
-        res.json({token, userFound: {_id: userFound._id , role: userFound.admin}})
+        res.json({token, userFound: {_id: userFound._id }})
     }catch(error){
         console.log(error)
     }
@@ -100,7 +84,7 @@ getsingup: async (req, res) => {
     }
 },
 
-    //get solo usuarios no admins
+    //get solo usuarios no admins :) 
     getUsersByRole: async (req, res) => {
         try {
             const adminFound = await Admin.findOne({ name: 'user' });
@@ -116,80 +100,78 @@ getsingup: async (req, res) => {
         }
     },
 
-    
+
     // send email Link For reset Password
     sendPasswordLink : async (req, res) => {
-        const email = await req.body.email;
-    
-        if (!email) {
-            return res.status(406).json({ message: "Ingresa un correo válido." });
+    const email = await req.body.email;
+
+    if (!email) {
+        return res.status(406).json({ message: "Ingresa un correo válido." });
+    }
+
+    try {
+        const userFound = await User.findOne({ email: req.body.email }).populate(
+        "admin"
+        );
+
+        if (!userFound) {
+        return res.status(406).json({ message: "Ingresa un correo válido." });
         }
-    
+
+
+      // token generate for reset password
+        const token = jwt.sign({ id: userFound._id }, config.SECRET, {
+        expiresIn: 3600, // 1 hour
+        });
+
+        const mailOptions = {
+        from: config.ADMIN_EMAIL,
+        to: email,
+        subject: "Enviando correo electrónico para restablecer la contraseña",
+        text: `Este Enlace es válido por 1 horas ${config.URL}change-password/${token}`,
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log("error", error);
+            return res.status(406).json({ message: "El correo no fue enviado.", error });
+        } else {
+            console.log("Email sent", info.response);
+            return res.status(200).json({
+            status: 200,
+            message: "El correo fue enviado satisfactoriamente.",
+            });
+        }
+        });
+    } catch (error) {
+        return res.status(401).json({ status: 401, message: "Usuario inválido." });
+    }
+    },
+
+    //cambio de contraseña
+    changePassword: async (req, res) => {
         try {
-            const userFound = await User.findOne({ email: req.body.email }).populate(
-            "admin"
+            const newPassword = req.body.password; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
+            const id = req.userId;
+            console.log(req.userId)
+            
+            // Genera una nueva sal (valor aleatorio)
+            const saltRounds = 10; // Número de rondas de cifrado
+            const salt = await bcrypt.genSalt(saltRounds);
+    
+            // Cifra la nueva contraseña usando la sal generada
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
+    
+            // Actualiza la contraseña en la base de datos
+            const user = await User.findByIdAndUpdate(
+                { _id: id },
+                { password: hashedPassword }
             );
     
-            if (!userFound) {
-            return res.status(406).json({ message: "Ingresa un correo válido." });
-            }
-    
-    
-          // token generate for reset password
-            const token = jwt.sign({ id: userFound._id }, config.SECRET, {
-            expiresIn: 3600, // 1 hour
-            });
-    
-            const mailOptions = {
-            from: config.ADMIN_EMAIL,
-            to: email,
-            subject: "Enviando correo electrónico para restablecer la contraseña",
-            text: `Este Enlace es válido por 1 horas ${config.URL}change-password/${token}`,
-            };
-            transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log("error", error);
-                return res.status(406).json({ message: "El correo no fue enviado.", error });
-            } else {
-                console.log("Email sent", info.response);
-                return res.status(200).json({
-                status: 200,
-                message: "El correo fue enviado satisfactoriamente.",
-                });
-            }
-            });
+            res.status(201).json({ message: "La contraseña se ha cambiado" });
         } catch (error) {
-            return res.status(401).json({ status: 401, message: "Usuario inválido." });
+            res.status(401).json({ status: 401, error });
         }
-        },
-    
-        //cambio de contraseña
-        changePassword: async (req, res) => {
-            try {
-                const newPassword = req.body.password; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
-                const id = req.userId;
-                console.log(req.userId)
-                
-                // Genera una nueva sal (valor aleatorio)
-                const saltRounds = 10; // Número de rondas de cifrado
-                const salt = await bcrypt.genSalt(saltRounds);
-        
-                // Cifra la nueva contraseña usando la sal generada
-                const hashedPassword = await bcrypt.hash(newPassword, salt);
-        
-                // Actualiza la contraseña en la base de datos
-                const user = await User.findByIdAndUpdate(
-                    { _id: id },
-                    { password: hashedPassword }
-                );
-        
-                res.status(201).json({ message: "La contraseña se ha cambiado" });
-            } catch (error) {
-                res.status(401).json({ status: 401, error });
-            }
-        }
-    
-
+    }
 }
 
 module.exports = userControllers
