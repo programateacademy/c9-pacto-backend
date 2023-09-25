@@ -66,11 +66,11 @@ const userControllers ={
         if (!mathPassword) return res.status(401).json({token: null, message: 'invalid password '})
         
         //una vez autentificado loguea y genera un nuevo token
-        const token = jwt.sign({id: userFound._id}, config.SECRET,{
+        const token = jwt.sign({id: userFound._id, role: userFound.admin}, config.SECRET,{
             expiresIn: 86400
         })
 
-        res.json({token, userFound: {_id: userFound._id }})
+        res.json({token, userFound: {_id: userFound._id , role: userFound.admin}})
     }catch(error){
         console.log(error)
     }
