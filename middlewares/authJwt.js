@@ -26,7 +26,6 @@ const authJwt ={
         res.status(401).json({message: 'Unauthorized'})
     }
 },
-
 //verificación si es un administrador
 isAdmin : async (req,res, next) =>{
     try{
