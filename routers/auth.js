@@ -1,7 +1,7 @@
 const express = require('express')
 const userControllers = require ('../controllers/auth')
 const verifySignup = require ('../middlewares/verifySignup')
-const authJwt = require('../middlewares/authJwt')
+const authJwt = require ('../middlewares/authJwt.js')
 const router = express.Router()
 
 router.use((req, res, next) => {
@@ -24,7 +24,7 @@ router.get('/usersByRole',userControllers.getUsersByRole)
 
 
 
-router.post('/change-password', userControllers.changePassword)
+router.post('/change-password', authJwt.verifyToken,userControllers.changePassword)
 
 router.post("/send-password-link", userControllers.sendPasswordLink)
 
