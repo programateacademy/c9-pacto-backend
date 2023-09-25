@@ -24,7 +24,7 @@ router.get('/usersByRole',userControllers.getUsersByRole)
 
 
 
-router.post('/change-password', authJwt.verifyToken,userControllers.changePassword)
+router.post('/change-password', userControllers.changePassword)
 
 router.post("/send-password-link", userControllers.sendPasswordLink)
 
