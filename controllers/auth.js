@@ -19,13 +19,29 @@ const userControllers ={
     //Controlador para la creacion de Usuarios & Administradores
     signup: async (req,res) =>{
         try{
-        const {userName, email, password,userImg, admin} = req.body
+        const {userName, Names,surNames, email, password,userImg, typEntitySocialActor,companyNameOrentity,
+            phoneNumber,country,gender, years,ethnicity, person, departamento, municipio, descriptionUser, interests,
+            admin } = req.body
 
         const userRegis = new User({
             userName,
+            Names,
+            surNames,
             email,
             password,
-            userImg
+            userImg,
+            typEntitySocialActor,
+            companyNameOrentity,
+            phoneNumber,
+            country,
+            gender,
+            years,
+            ethnicity,
+            person,
+            departamento,
+            municipio,
+            descriptionUser,
+            interests
         })
 
         if(admin){
@@ -43,7 +59,6 @@ const userControllers ={
             }
         }
         const savedUser= await userRegis.save()
-        console.log(userRegis)
 
         const token = jwt.sign({id: savedUser._id}, config.SECRET,{
             expiresIn: 86400 //tiempo de que tarda en expirar el token (cada 24h) 
@@ -152,7 +167,6 @@ getsingup: async (req, res) => {
         try {
             const newPassword = req.body.password; // Obtiene la nueva contraseña desde el cuerpo de la solicitud
             const id = req.userId;
-            console.log(req.userId)
             
             // Genera una nueva sal (valor aleatorio)
             const saltRounds = 10; // Número de rondas de cifrado
