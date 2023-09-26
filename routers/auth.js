@@ -20,13 +20,11 @@ router.post('/signin',userControllers.signin) // ruta inicio de sesión
 
 router.get('/',authJwt.verifyToken,userControllers.getsingup) //buscar todos los usuarios
 
-router.get('/usersByRole',userControllers.getUsersByRole)
+router.get('/usersByRole',userControllers.getUsersByRole) //buscar solo usuarios omitiendo admins
 
+router.post('/change-password', authJwt.verifyToken,userControllers.changePassword) //cambio de contraseña
 
-
-router.post('/change-password', authJwt.verifyToken,userControllers.changePassword)
-
-router.post("/send-password-link", userControllers.sendPasswordLink)
+router.post("/send-password-link", userControllers.sendPasswordLink) //envio de correo
 
 
 
