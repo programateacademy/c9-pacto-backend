@@ -6,12 +6,12 @@ const ObjectId = mongoose.Types.ObjectId;
 
 
 const controllerPublication = {
+
+    //Crear publicacion
     create: async (req, res) => {
         try {
             const { userId, description, image, descriptionImg,likes} = req.body
             const date_create = new Date();
-
-            console.log("UserID:", userId)
 
             const user = await User.findById(userId) // buscar el ID del usuario
             if (!user) {
@@ -23,10 +23,10 @@ const controllerPublication = {
                 date_create: date_create,
                 description: description,
                 image: image,
-                descriptionImg,
+                descriptionImg, 
                 likes: []
             });
-            newPublication.likes = likes.map((userId) => mongoose.Types.ObjectId(userId));
+            newPublication.likes = likes.map((userId) => mongoose.Types.ObjectId(userId)); //Mapeo de _id para evitarlo en la base de datos
             await newPublication.save()
             res.json({ msg: 'publication created', publication: newPublication });
         } catch (error) {
@@ -34,24 +34,28 @@ const controllerPublication = {
         }
     },
 
+    //buscar publicaciones
     getPublication: async (req, res) => {
         try {
             const publications = await Publication.find({})
-            res.json(publications.reverse())
+            res.json(publications.reverse()) //devuelve la ultima publicacion y la unica primero
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     },
 
+    //buscar publicacioens por Id
     getPublicationById: async (req, res) => {
         try {
             const { id } = req.params
-            const publication = await Publication.findById(id)
+            const publication = await Publication.findById(id) //filtrado por id 
             res.json(publication)
         } catch (error) {
             return res.status(500).json({ msg: error.message })
         }
     },
+
+    //actualizacion de publicaciones
     updatePublication: async (req, res) => {
         try {
             const { id } = req.params
@@ -60,7 +64,7 @@ const controllerPublication = {
             const image = req.body.image
             const descriptionImg = req.body.descriptionImg
 
-            await Publication.findByIdAndUpdate(id, {
+            await Publication.findByIdAndUpdate(id, { //busca por id para actualizar parametros de la publicacion
                 user: user._id,
                 description: description,
                 image: image,
@@ -74,6 +78,7 @@ const controllerPublication = {
         }
     },
 
+    //Eliminar Publicación
     deletePublication: async (req, res) => {
         try {
             const { id } = req.params
@@ -95,9 +100,7 @@ const controllerPublication = {
                 return res.status(400).json({ error: 'userId no es válido' });
             }
 
-            console.log(userId)
-
-            const publication = await Publication.findById(id);
+            const publication = await Publication.findById(id); //verifica si existe la publicación
 
             if (!publication) {
                 return res.status(404).json({ error: 'Publicación no encontrada' });
@@ -129,16 +132,14 @@ const controllerPublication = {
                 return res.status(400).json({ error: 'userId no es válido' });
             }
 
-            console.log(userId)
-
             const publication = await Publication.findById(id);
 
             if (!publication) {
-                return res.status(404).json({ error: 'Publicación no encontrada' });
+                return res.status(404).json({ error: 'Publicación no encontrada' }); //verifica si existe la publicación
             }
 
-            if (!publication.likes.includes(userId)) {
-                return res.status(400).json({ error: 'El usuario no ha dado like a esta publicación' });
+            if (!publication.likes.includes(userId)) { // valida la existencia del like para removerlo 
+                return res.status(400).json({ error: 'El usuario no ha dado like a esta publicación' }); 
             }
 
             publication.likes = publication.likes.filter(user => user.toString() !== userId);
