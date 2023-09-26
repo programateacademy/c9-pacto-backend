@@ -6,7 +6,7 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     userName: {
         type: String,
-        maxLenth: 100
+        maxLenth: 55
     },
 
     names:{
@@ -87,6 +87,16 @@ const userSchema = new Schema({
         type: String
     },
 
+    descriptionUser:{
+        type: String,
+        default: "sin descripcion..."
+    },
+
+    interests:{
+        type: String,
+        default: "Sin intereses..."
+    },
+
     admin:[{
         ref: "Admin", //Referecia a modelo de Admin
         type: mongoose.Schema.Types.ObjectId
@@ -94,15 +104,18 @@ const userSchema = new Schema({
     
 },{versionKey:false, timestamps:true});
 
+//encriptado de contraseña
 userSchema.statics.encryptPassword = async (password) =>{
     const salt = await bcrypt.genSalt(10)
     return await bcrypt.hash(password,salt)
 };
 
+//comparar antes de iniciar
 userSchema.statics.comparPassword = async (password, receivedPassword) =>{
     return await bcrypt.compare(password, receivedPassword)
 };
 
+//hasheo de contraseña
 userSchema.pre("save", async function (next) {
     const user = this;
     if (!user.isModified("password")) {

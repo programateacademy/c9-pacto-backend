@@ -8,10 +8,10 @@ const comments = require('./routers/PublicationsRou/comments')
 const rolAdmin = require('./libs/initialSetup')
 
 const app = express()
-rolAdmin.createAdmin()
-rolAdmin.adminprint()
+rolAdmin.createAdmin() //al iniciar la base por primera vez crea los roles
+rolAdmin.adminprint() //imprime la creacion del primer Admin 
 
-
+// configuracion CORS
 app.use(cors({
     origin:"*",
     methods:"GET,HEAD,POST,PATCH,PUT,DELETE",
@@ -24,12 +24,10 @@ app.use(express.json())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
-
+// manejo de rutas
 app.use('/users',user)
 app.use('/publictpacto',publication)
 app.use('/admins',admin)
-
-
 app.use('/comments',comments)
 
 

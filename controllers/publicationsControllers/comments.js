@@ -5,6 +5,7 @@ const Publication = require('../../models/publications/publication')
 
 const commentController ={
 
+    //Creacion de comentarios
     createComment: async (req, res) => {
         try {
             const { content, publicationId, userId } = req.body;
@@ -37,6 +38,7 @@ const commentController ={
         }
     },
     
+    // actualizar comentarios 
     updateComment: async (req, res) => {
         try {
             const { id } = req.params;

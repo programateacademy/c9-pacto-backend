@@ -6,9 +6,9 @@ const router = express.Router()
 const authJwt = require('../middlewares/authJwt')
 const verifySignup = require('../middlewares/verifySignup')
 
-
-router.post('/create', [authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRoleExist, verifySignup.checkDupletUserNameOrEmail
-], controllerUser.create) // registro de usuarios que solo puede realizar admin
+// registro de usuarios que solo puede realizar admin
+//router.post('/create', [authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRoleExist, verifySignup.checkDupletUserNameOrEmail
+//], controllerUser.create) 
 
 router.put('/update/:id', controllerUser.updatedUser)
 router.get('/', controllerUser.getUser)
