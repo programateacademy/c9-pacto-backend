@@ -19,13 +19,14 @@ const userControllers ={
     //Controlador para la creacion de Usuarios & Administradores
     signup: async (req,res) =>{
         try{
-        const {userName, Names,surNames, email, password,userImg, typEntitySocialActor,companyNameOrentity,
+        const {names,surNames, email, password,userImg, typEntitySocialActor,companyNameOrentity,
             phoneNumber,country,gender, years,ethnicity, person, departamento, municipio, descriptionUser, interests,
             admin } = req.body
 
+        const userName = `${names} ${surNames}`;
         const userRegis = new User({
             userName,
-            Names,
+            names,
             surNames,
             email,
             password,
@@ -63,7 +64,7 @@ const userControllers ={
         const token = jwt.sign({id: savedUser._id}, config.SECRET,{
             expiresIn: 86400 //tiempo de que tarda en expirar el token (cada 24h) 
         })
-        res.status(200).json({token})
+        res.status(200).json({token, savedUser})
     }catch(error){
         return res.status(500).json(error.message)
     }
