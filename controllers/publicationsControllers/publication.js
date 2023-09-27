@@ -37,12 +37,12 @@ const controllerPublication = {
     //buscar publicaciones
     getPublication: async (req, res) => {
         try {
-            const publications = await Publication.find({})
-            res.json(publications.reverse()) //devuelve la ultima publicacion y la unica primero
+            const publications = await Publication.find({}).sort({ timestamp: -1 }); // Ordena por timestamp descendente
+            res.json(publications);
         } catch (error) {
-            return res.status(500).json({ msg: error.message })
+            return res.status(500).json({ msg: error.message });
         }
-    },
+    },    
 
     //buscar publicacioens por Id
     getPublicationById: async (req, res) => {
