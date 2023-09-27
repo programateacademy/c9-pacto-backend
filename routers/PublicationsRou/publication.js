@@ -15,6 +15,8 @@ router.get('/', controllerPublication.getPublication)
 //publicaiones por ID
 router.get('/:id', controllerPublication.getPublicationById)
 
+router.get('/user/:userId', controllerPublication.getPublicationsByUserId);
+
 //actualizar la publicación
 router.patch('/update/:id', authJwt.verifyToken, controllerPublication.updatePublication)
 
