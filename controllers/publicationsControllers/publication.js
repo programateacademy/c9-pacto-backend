@@ -37,12 +37,12 @@ const controllerPublication = {
     //buscar publicaciones
     getPublication: async (req, res) => {
         try {
-            const publications = await Publication.find({}).sort({ timestamp: -1 }); // Ordena por timestamp descendente
-            res.json(publications);
+            const publications = await Publication.find({})
+            res.json(publications.reverse()) //devuelve la ultima publicacion y la unica primero
         } catch (error) {
-            return res.status(500).json({ msg: error.message });
+            return res.status(500).json({ msg: error.message })
         }
-    },    
+    },
 
     //buscar publicacioens por Id
     getPublicationById: async (req, res) => {
@@ -55,6 +55,16 @@ const controllerPublication = {
         }
     },
 
+    getPublicationsByUserId: async (req, res) => {
+        const userId = req.params.userId; // Obtén el ID de usuario de los parámetros de la solicitud
+        try {
+            const publications = await Publication.find({ user: userId }).sort({ timestamp: -1 }); // Filtra por ID de usuario y ordena por timestamp descendente
+            res.json(publications);
+        } catch (error) {
+            return res.status(500).json({ msg: error.message });
+        }
+    },
+    
     //actualizacion de publicaciones
     updatePublication: async (req, res) => {
         try {
