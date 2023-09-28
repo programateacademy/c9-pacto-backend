@@ -59,21 +59,32 @@ El proyecto está organizado de la siguiente manera:
 4. Ejecuta npm start para iniciar la aplicación.
 
 ## Instalacion
+
 1 Clona el repositorio en tu maquina local
+```bash
+$ git clone git@github.com:c9-pacto-backend
+```
 
-- git clone git@github.com:c9-pacto-backend
-2 Navega en el directorio del proyecto
+2 Navega en el directorio del proyecto 
+```bash
+$ cd c9-pacto-backend
+```
 
-  cd backend_foro
 3 Puedes cambiar el origen del proyecto con los siguientes comando
 
-- git remote -v
-- git remote remove origin
-- git remote add origin <nueva_url_del_repositorio>
-4 Instalar las dependecias necesarias
+```bash
+$ git remote -v
+$ git remote remove origin
+$ git remote add origin <nueva_url_del_repositorio>
+```
 
-Recuerda tener el package.json y el package-lock.json en el root de la carpeta y ejecutas
-- npm i
+4 Instalar las dependecias necesarias
+- Recuerda tener el package.json y el package-lock.json en el root de la carpeta y ejecutas
+
+```bash
+$ npm i
+```
+
 Uso
 1 Inicia la app con
 
