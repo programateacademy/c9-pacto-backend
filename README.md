@@ -1,4 +1,4 @@
-![image](<img width="576" alt="Imag_redme_backend" src="https://github.com/programateacademy/c9-pacto-backend/assets/132396456/955849be-84bb-48a8-9d0f-46a9a13179d6">)
+![image]("https://github.com/programateacademy/c9-pacto-backend/assets/132396456/6e48563c-0f0c-4964-908f-4334da484006")
 
 # Aplicación de Vinculación Laboral - Backend
 
