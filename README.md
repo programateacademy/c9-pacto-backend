@@ -1,3 +1,5 @@
+![image](<img width="576" alt="Imag_redme_backend" src="https://github.com/programateacademy/c9-pacto-backend/assets/132396456/955849be-84bb-48a8-9d0f-46a9a13179d6">)
+
 # Aplicación de Vinculación Laboral - Backend
 
 Este repositorio contiene el código del backend de una aplicación que permite la vinculación laboral de personas con discapacidad con entidades, empresas y organizaciones interesadas en la inclusión laboral.
