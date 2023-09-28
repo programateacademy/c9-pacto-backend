@@ -100,26 +100,27 @@ Si deseas contribuir a este proyecto, sigue estos pasos:
 
 ## Contacto
 
+
 Si tienes preguntas o sugerencias, no dudes en ponerte en contacto con el equipo de desarrollo enviando un correo electrónico a alguno de los siguientes miembros:
 
-jmcardenas1807@gmail.com 
-Maribelaristizabal079@gmail.com
-Sebastiantincon834@gmail.com
-Jaljordan77@gmail.com
-Palacioalexander5@gmail.com
-Ruizvalencia78@gmail.com
-Brayantandap@gmail.com
+- [jmcardenas1807@gmail.com](mailto:jmcardenas1807@gmail.com )
+- [Maribelaristizabal079@gmail.com](mailto:maribelaristizabal079@gmail.com)
+- [Sebastiantincon834@gmail.com](mailto:sebastiantincon834@gmail.com)
+- [Jaljordan77@gmail.com](mailto:jaljordan77@gmail.com)
+- [Palacioalexander5@gmail.com](mailto:palacioalexander5@gmail.com)
+- [Ruizvalencia78@gmail.com](mailto:ruizvalencia78@gmail.com)
+- [Brayantandap@gmail.com](mailto:brayantandap@gmail.com)
 
 
 ## Autores
 
-@nicolas paez
-@JMCardenass
-@john palacios
-@juan andres Ruiz
-@brayan Triana
-@maribel aristizabal
-@Sebastian Beltran
-@julian gaitan
+- [@nicolas paez](https://github.com/nikolaspaez06)
+- [@JMCardenass](https://github.com/JMCardenass)
+- [@john palacios ](https://github.com/John9135)
+- [@juan andres  Ruiz](https://github.com/juan0941)
+- [@brayan Triana](https://github.com/Vincent10-o)
+- [@maribel aristizabal](https://github.com/maribelaristizabal)
+- [@Sebastian Beltran](https://github.com/Sebastian-Beltran-rincon-22)
+- [@julian gaitan](https://github.com/Julian9373)
 
 ¡Gracias por contribuir a la inclusión laboral de personas con discapacidad!
